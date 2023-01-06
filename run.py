@@ -13,6 +13,8 @@ from util import (
     save_predictions_as_imgs
 ) 
 from models.hrnet import config
+from models.SETR.setr import ViT
+from models.swin.swin import SwinTransformer
 from models.hrnet.hrnet import get_seg_model
 from torch.utils.tensorboard import SummaryWriter
 writer = SummaryWriter()
@@ -35,10 +37,10 @@ def get_model(args):
         model = get_seg_model(config).to(DEVICE)
     elif args.model == 'unet':
         model = Unet().to(DEVICE)
-    # elif args.model == 'swin':
-    #     model = Swin().to(DEVICE)
-    # elif args.model == 'setr':
-    #     model = SETR().to(DEVICE)
+    elif args.model == 'swin':
+        model = SwinTransformer().to(DEVICE)
+    elif args.model == 'setr':
+        model = ViT().to(DEVICE)
 
     return model
 
